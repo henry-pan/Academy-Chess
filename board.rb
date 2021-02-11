@@ -50,7 +50,6 @@ class Board
     raise "Start position is empty" if self[start_pos] == @null_piece
     raise "End position contains own piece" if color == self[end_pos].color
 
-    # puts "Moving (#{color} #{self[start_pos].symbol}) #{start_pos} to #{end_pos}"
     self[end_pos], self[start_pos] = self[start_pos], @null_piece
 
     self[end_pos].pos = end_pos

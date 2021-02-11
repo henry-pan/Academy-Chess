@@ -11,14 +11,37 @@ class Game
     @current_player = @player_1
   end
 
-  def play
-    system("clear")
-    puts "========================"
-    puts "=== Welcome to Chess ==="
-    puts "========================"
-    sleep(2)
-    system("clear")
+  def start_game
+    input_invalid = true
+    while input_invalid
+      system("clear")
+      puts "+======================================+"
+      puts "|   Welcome to Academy Chess           |"
+      puts "|      -- Henry Pan, Michael Dean --   |"
+      puts "+======================================+\n\n"
+      puts "- Select game skin:"
+      puts "  - \"classic\" for regular chess"
+      puts "  - \"animal\" for animal rumble"
+      puts "  - \"fantasy\" for humans vs monsters\n\n"
+      print "> "
 
+      input = gets.chomp
+      case input
+      when "c", "a", "f", "classic", "animal", "fantasy"
+        skin = input
+        input_invalid = false
+      else
+        puts "\nInvalid skin! Please try again."
+        sleep(2)
+      end
+    end
+    sleep(1)
+    system("clear")
+    play
+  end
+
+
+  def play
     while !@board.checkmate?(@current_player.color)
       notify_players
       @current_player.make_move(@board)
@@ -47,7 +70,7 @@ class Game
 end
 
 g = Game.new
-g.play
+g.start_game
 
 # b = Board.new
 # d = Display.new(b)

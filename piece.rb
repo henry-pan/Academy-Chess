@@ -6,6 +6,13 @@ class Piece
   attr_reader :color, :board, :symbol
   attr_accessor :pos
 
+  # Rook, Knight, Bishop, Queen, King, Pawn
+  CLASSIC = ["♜","♞","♝","♛","♚","♟"]
+  ANIMAL_B =  ["🦊","🐰","🦝","🐿","🦥","🐭"]
+  ANIMAL_W =  ["🦏","🐴","🐻","🐯","🦁","🐗"]
+  FANTASY_B = ["👹","👻","🦹","🐉","🧛","🧟"]
+  FANTASY_W = ["🏰","🦄","🧙‍","👸","🤴","🗡️"]
+  
   def initialize(color, board, pos)
     @color = color
     @board = board
@@ -13,7 +20,7 @@ class Piece
   end
 
   def to_s
-    empty? ? " " : symbol
+    empty? ? " " : CLASSIC[symbol]
   end
 
   def empty?
@@ -56,7 +63,7 @@ class Queen < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = :♛
+    @symbol = 3
   end
 
   def move_dirs  
@@ -73,7 +80,7 @@ class Rook < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = :♜
+    @symbol = 0
   end
 
   def move_dirs  
@@ -90,7 +97,7 @@ class Bishop < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = :♝
+    @symbol = 2
   end
 
   def move_dirs
@@ -105,7 +112,7 @@ class Knight < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = :♞
+    @symbol = 1
   end
 
   attr_reader :symbol  
@@ -133,7 +140,7 @@ class King < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = :♚
+    @symbol = 4
   end
 
   def move_diffs
@@ -157,7 +164,7 @@ class Pawn < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = :♟
+    @symbol = 5
   end
 
   def moves

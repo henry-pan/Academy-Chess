@@ -18,8 +18,8 @@ class HumanPlayer < Player
     while start_pos == nil
       system("clear")
       @display.render
-      puts "-- #{color.capitalize}, it's your move! -- "
-      puts "Use the arrow keys to select a piece, and press enter to move."
+      # puts "-- #{color.capitalize}, it's your move! -- "
+      # puts "Use the arrow keys to select a piece, and press enter to move."
       start_pos = @display.cursor.get_input.dup
     end
 
@@ -27,8 +27,8 @@ class HumanPlayer < Player
     while end_pos == nil
       system("clear")
       @display.render
-      puts "-- #{color.capitalize}, it's your move! -- "
-      puts "Select a new position for this piece using the arrow keys."
+      # puts "-- #{color.capitalize}, it's your move! -- "
+      # puts "Select a new position for this piece using the arrow keys."
       end_pos = @display.cursor.get_input.dup
     end
 
