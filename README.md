@@ -1,7 +1,7 @@
 # Academy Chess
 ### Authors: Henry Pan, Michael Dean
 
-This is a terminal chess program written in Ruby, made at App Academy as a pair programming project.
+This is a terminal chess program written in Ruby, made at App Academy as a pair programming project ([seen here](https://github.com/henry-pan/AA-Classwork/tree/main/W4D3)).
 
 ## How to Play
 In the terminal, run `ruby game.rb`.
