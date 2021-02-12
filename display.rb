@@ -11,23 +11,23 @@ class Display
     @cursor = Cursor.new([6,4], @board)
   end
 
-  def render
-    puts "+======================================+"
-    puts "|            ACADEMY CHESS             |"
-    puts "|     - A Battle as Old as Time -      |"
-    # puts "|  - Trouble in the Animal Kingdom -   |"
-    # puts "|    - They are the Real Monsters -    |"
-    puts "+======================================+"
-
+  def render(color)
     x, y = @cursor.cursor_pos
-
-    puts "| Cursor: [#{(("a".."h").to_a[y])}#{(8-x)}]     ||     White's Turn |"
+    message = "#{color.capitalize}'s Turn"
+    puts "+===================++=================+"
+    puts "| Classic Mode      ||            [#{(("a".."h").to_a[y])}#{(8-x)}] |"
+    # puts "|            ACADEMY CHESS             |"
+    # puts "|           - Classic Mode -           |"
+    # puts "|            - Horde Mode -            |"
+    # puts "|           - Fantasy Mode -           |"
+    puts "+======================================+"
+    puts "| #{message}                         |"
     puts "+======================================+\n\n"
-    code_notation = false
-    puts code_notation ? "           #{("0".."7").to_a.join(" ")}  " : "             #{("a".."h").to_a.join(" ")}"
+    
+    puts "             #{("a".."h").to_a.join(" ")}"
 
     @board.rows.each_with_index do |row, i|
-      print code_notation ? "         #{(i)} " : "           #{(8-i)} "
+      print "           #{(8-i)} "
       row.each_with_index do |col, j|
         if col.color == "white"
           if [x, y] == [i, j]
@@ -47,7 +47,7 @@ class Display
       # print code_notation ? "#{(i)}" : "#{(8-i)}"
       puts ""
     end
-
+    puts ""
     # puts code_notation ? "           #{("0".."7").to_a.join(" ")}  " : "  #{("a".."h").to_a.join(" ")}"
   end
   

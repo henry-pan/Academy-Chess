@@ -11,7 +11,7 @@ class Game
     @current_player = @player_1
   end
 
-  def start_game
+  def main_menu
     input_invalid = true
     while input_invalid
       system("clear")
@@ -19,37 +19,47 @@ class Game
       puts "|   Welcome to Academy Chess           |"
       puts "|      -- Henry Pan, Michael Dean --   |"
       puts "+======================================+\n\n"
-      puts "- Select game skin:"
+      puts "- Select game mode:"
       puts "  - \"classic\" for regular chess"
-      puts "  - \"animal\" for animal rumble"
-      puts "  - \"fantasy\" for humans vs monsters\n\n"
+      puts "  - \"horde\" for horde chess"
+      puts "  - \"fantasy\" for special game mode"
+      puts "  - \"replay\" to watch a replay"
+      puts "  - \"quit\" to exit\n\n"
       print "> "
 
       input = gets.chomp
       case input
-      when "c", "a", "f", "classic", "animal", "fantasy"
-        skin = input
+      when "c", "h", "f", "classic", "horde", "fantasy"
+        mode = input
         input_invalid = false
+        sleep(1)
+        system("clear")
+        play
+      when "replay"
+        puts "Replay feature not yet available."
+        sleep(2)
+      when "quit"
+        puts "Goodbye.\n\n"
+        sleep(2)
+        system("clear")
+        return
       else
-        puts "\nInvalid skin! Please try again."
+        puts "\nInvalid game mode! Please try again."
         sleep(2)
       end
     end
-    sleep(1)
-    system("clear")
-    play
   end
 
 
   def play
     while !@board.checkmate?(@current_player.color)
-      notify_players
+      # notify_players
       @current_player.make_move(@board)
       swap_turn!
     end
     system("clear")
     swap_turn!
-    @display.render
+    @display.render(@current_player.color)
     puts "Congratulations, #{@current_player.color}, you win!"
   end
 
@@ -70,28 +80,4 @@ class Game
 end
 
 g = Game.new
-g.start_game
-
-# b = Board.new
-# d = Display.new(b)
-# # while true
-# # d.render
-# # d.cursor.get_input
-# # end
-# d.render
-# b.move_piece("white", [6,5], [5,5])
-# sleep(1)
-# d.render
-# b.move_piece("black", [1,4], [3,4])
-# sleep(1)
-# d.render
-# b.move_piece("white", [6,6], [4,6])
-# sleep(1)
-# d.render
-# b.move_piece("black", [0,3], [4,7])
-# sleep(1)
-# d.render
-
-# p "White is in checkmate? #{b.checkmate?("white")}"
-
-# #p "🏰🦄🧙👸👑🧙🦄🏰🗡️ 🗡️ 🗡️ 🗡️ 🗡️ 🗡️ 🗡️ 🗡️"
+g.main_menu

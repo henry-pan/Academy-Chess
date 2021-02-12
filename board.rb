@@ -49,6 +49,7 @@ class Board
     raise "End position is out of bounds" if !valid_pos?(end_pos)
     raise "Start position is empty" if self[start_pos] == @null_piece
     raise "End position contains own piece" if color == self[end_pos].color
+    raise "That's not your piece" if color != self[start_pos].color
 
     self[end_pos], self[start_pos] = self[start_pos], @null_piece
 
@@ -63,7 +64,7 @@ class Board
     raise "Start position is empty" if self[start_pos] == @null_piece
     raise "End position contains own piece" if color == self[end_pos].color
 
-    self[end_pos], self[start_pos] = self[start_pos], self[end_pos]
+    self[end_pos], self[start_pos] = self[start_pos], @null_piece
 
     self[end_pos].pos = end_pos
   end
