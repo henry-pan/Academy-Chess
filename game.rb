@@ -22,19 +22,21 @@ class Game
       puts "- Select game mode:"
       puts "  - \"classic\" for regular chess"
       puts "  - \"horde\" for horde chess"
-      puts "  - \"fantasy\" for special game mode"
+      puts "  - \"settings\" to change settings"
       puts "  - \"replay\" to watch a replay"
       puts "  - \"quit\" to exit\n\n"
       print "> "
 
       input = gets.chomp
       case input
-      when "c", "h", "f", "classic", "horde", "fantasy"
+      when "c", "h", "classic", "horde"
         mode = input
         input_invalid = false
-        sleep(1)
         system("clear")
         play
+      when "settings"
+        puts "Settings menu not yet available."
+        sleep(2)
       when "replay"
         puts "Replay feature not yet available."
         sleep(2)

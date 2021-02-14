@@ -18,7 +18,9 @@ This version only features basic rules and does not yet implement castling, en p
 - Horde Mode - One team will only have 4 rows of pawns.
 - Zombie Computer - A computer player that chooses moves randomly and captures pieces whenever possible.
 - Replay System - Rewatch a completed game, pieces will move on their own. After a game is completed, the log of all moves taken in the game are stored in a file.
-- New Game Mode - A new game mode with some new pieces and random events.
+
+## Considered Features
+- New Game Mode - A new game mode with new pieces and randomly occurring events.
 - Bandit Piece - A teamless piece that moves around the field randomly like the King. If it finds a non-Pawn piece, it will demote that piece to a Pawn and disappear.
 - Promotion Piece - A teamless piece that is stationary once spawned onto the board. Any piece that captures it is promoted.
 - Amazon Piece - A promoted piece that can move like a Queen and a Knight.

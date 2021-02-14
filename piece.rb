@@ -6,12 +6,12 @@ class Piece
   attr_reader :color, :board, :symbol
   attr_accessor :pos
 
-  # Rook, Knight, Bishop, Queen, King, Pawn
-  CLASSIC = ["♜","♞","♝","♛","♚","♟"]
-  ANIMAL_B =  ["🦊","🐰","🦝","🐿","🦥","🐭"]
-  ANIMAL_W =  ["🦏","🐴","🐻","🐯","🦁","🐗"]
-  FANTASY_B = ["👹","👻","🦹","🐉","🧛","🧟"]
-  FANTASY_W = ["🏰","🦄","🧙‍","👸","🤴","🗡️"]
+  CLASSIC_B = {rook:" ♜ ", knight:" ♞ ", bishop: " ♝ ", queen: " ♛ ", king: " ♚ ", pawn: " ♟ ", null: "   "}
+  CLASSIC_W = {rook:" ♖ ", knight:" ♘ ", bishop: " ♗ ", queen: " ♕ ", king: " ♔ ", pawn: " ♙ ", null: "   "}
+  ANIMAL_B =  {rook:"🦊", knight:"🐰", bishop: "🦝", queen: "🐿 ", king: "🦥", pawn: "🐭", null: "  "}
+  ANIMAL_W =  {rook:"🦏", knight:"🐴", bishop: "🐻", queen: "🐯", king: "🦁", pawn: "🐗", null: "  "}
+  FANTASY_B = {rook:"👹", knight:"👻", bishop: "🦹", queen: "🐉", king: "🧛", pawn: "🧟", null: "  "}
+  FANTASY_W = {rook:"🏰", knight:"🦄", bishop: "🧙", queen: "👸", king: "🤴", pawn: "🗡️ ", null: "  "}
   
   def initialize(color, board, pos)
     @color = color
@@ -20,7 +20,7 @@ class Piece
   end
 
   def to_s
-    empty? ? " " : CLASSIC[symbol]
+    color == "white" ? CLASSIC_W[symbol] : CLASSIC_B[symbol]
   end
 
   def empty?
@@ -63,7 +63,7 @@ class Queen < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = 3
+    @symbol = :queen
   end
 
   def move_dirs  
@@ -80,7 +80,7 @@ class Rook < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = 0
+    @symbol = :rook
   end
 
   def move_dirs  
@@ -97,7 +97,7 @@ class Bishop < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = 2
+    @symbol = :bishop
   end
 
   def move_dirs
@@ -110,12 +110,12 @@ class Knight < Piece
 
   include Stepable
 
+  attr_reader :symbol
+
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = 1
+    @symbol = :knight
   end
-
-  attr_reader :symbol  
 
   def move_diffs
     [
@@ -140,7 +140,7 @@ class King < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = 4
+    @symbol = :king
   end
 
   def move_diffs
@@ -164,7 +164,7 @@ class Pawn < Piece
 
   def initialize(color, board, pos)
     super(color, board, pos)
-    @symbol = 5
+    @symbol = :pawn
   end
 
   def moves

@@ -16,33 +16,30 @@ class Display
     message = "#{color.capitalize}'s Turn"
     puts "+===================++=================+"
     puts "| Classic Mode      ||            [#{(("a".."h").to_a[y])}#{(8-x)}] |"
-    # puts "|            ACADEMY CHESS             |"
-    # puts "|           - Classic Mode -           |"
-    # puts "|            - Horde Mode -            |"
-    # puts "|           - Fantasy Mode -           |"
     puts "+======================================+"
     puts "| #{message}                         |"
     puts "+======================================+\n\n"
     
-    puts "             #{("a".."h").to_a.join(" ")}"
-
+    # puts "             #{("a".."h").to_a.join(" ")}" # Emoji Skin
+    puts "              #{("a".."h").to_a.join("  ")}" # Classic Skin
     @board.rows.each_with_index do |row, i|
       print "           #{(8-i)} "
       row.each_with_index do |col, j|
         if col.color == "white"
           if [x, y] == [i, j]
-            print "#{col.to_s}".light_white.on_red
+            print "#{col.to_s}".white.on_red
           else
-            print "#{col.to_s}".light_white
+            bg = (i+j).odd? ? :light_blue : :blue
+            print "#{col.to_s}".colorize({background: bg, color: :white})
           end
         else
           if [x, y] == [i, j]
-            print "#{col.to_s}".green.on_red
+            print "#{col.to_s}".black.on_red
           else
-            print "#{col.to_s}".green
+            bg = (i+j).odd? ? :light_blue : :blue
+            print "#{col.to_s}".colorize({background: bg, color: :black})
           end
         end
-        print " "
       end
       # print code_notation ? "#{(i)}" : "#{(8-i)}"
       puts ""
