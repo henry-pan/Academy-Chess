@@ -14,41 +14,53 @@ end
 class HumanPlayer < Player
 
   def make_move(board)
-    begin
+    valid_input = false
+    while !valid_input
+      valid_input = true
+      start_pos = get_start(board)
+      end_pos = get_end(board, start_pos)
+
+      valid_input = false if start_pos == end_pos # cancel piece selection
+    end
+
+    board.move_piece(@color, start_pos, end_pos)
+
+
+    # raise "Cannot move into check" if in_check?(color) 
+
+  end
+
+  def get_start(board)
+    start_valid = false
+    while !start_valid
+      start_valid = true
       start_pos = nil
       while start_pos == nil
         system("clear")
         @display.render(@color)
         start_pos = @display.cursor.get_input.dup
       end
+      start_valid = false if !board.valid_pos?(start_pos) # out-of-bounds
+      start_valid = false if board[start_pos].color != color # not your piece
+    end
+    start_pos
+  end
 
+  def get_end(board, start_pos)
+    end_valid = false
+    while !end_valid
+      end_valid = true
       end_pos = nil
       while end_pos == nil
         system("clear")
         @display.render(@color)
         end_pos = @display.cursor.get_input.dup
       end
-
-      board.move_piece(@color, start_pos, end_pos)
-
-
-      # raise "Start position is out of bounds" if !valid_pos?(start_pos)
-      # raise "End position is out of bounds" if !valid_pos?(end_pos)
-      # raise "Start position is empty" if self[start_pos] == @null_piece
-      # raise "End position contains own piece" if color == self[end_pos].color
-      # raise "That's not your piece" if color != self[start_pos].color
-  
-      # self[end_pos], self[start_pos] = self[start_pos], @null_piece
-  
-      # self[end_pos].pos = end_pos
-      # raise "Cannot move into check" if in_check?(color) 
-
-
-
-    rescue
-      sleep(5)
-      retry
+      end_valid = false if !board.valid_pos?(end_pos) # out-of-bounds
+      end_valid = false if start_pos != end_pos && board[end_pos].color == color # can't capture own piece
+      end_valid = false if !board[start_pos].valid_moves.include?(end_pos) # invalid move
     end
+    end_pos
   end
 
 end
