@@ -19,7 +19,7 @@ class Display
   end
 
   def render(color)
-    skin = "classic"
+    skin = "animal"
     x, y = @cursor.cursor_pos
     message = "#{color.capitalize}'s Turn"
     puts "+===================++=================+"
@@ -34,8 +34,32 @@ class Display
       puts "             #{("a".."h").to_a.join(" ")}" # Emoji Skin
     end
 
+    # print "+===================+"
+    # if skin == "classic"
+    #   print "    #{("a".."h").to_a.join("  ")}" # Classic Skin
+    # else
+    #   print "   #{("a".."h").to_a.join(" ")}" # Emoji Skin
+    # end
+    # puts ""
+
+
     # Print board
     @board.rows.each_with_index do |row, i|
+
+      # case i
+      # when 0 # Game Mode
+      #   print "| Classic Mode      |"
+      # when 1, 3, 5, 7 # Divider
+      #   print "+===================+"
+      # when 6 # Position
+      #   print "| [#{(("a".."h").to_a[y])}#{(8-x)}]              |"
+      # when 2 # Turn Indicator
+      #   print "| #{message}      |"
+      # else
+      #   print "                     "
+      # end
+      # print " #{(8-i)} "
+
       print "           #{(8-i)} "
       row.each_with_index do |col, j|
 

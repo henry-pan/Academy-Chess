@@ -22,7 +22,6 @@ class Game
       puts "- Select game mode:"
       puts "  - \"classic\" for regular chess"
       puts "  - \"horde\" for horde chess"
-      puts "  - \"settings\" to change settings"
       puts "  - \"replay\" to watch a replay"
       puts "  - \"quit\" to exit\n\n"
       print "> "
@@ -34,9 +33,6 @@ class Game
         input_invalid = false
         system("clear")
         play
-      when "settings"
-        puts "Settings menu not yet available."
-        sleep(2)
       when "replay"
         puts "Replay feature not yet available."
         sleep(2)
@@ -55,7 +51,6 @@ class Game
 
   def play
     while !@board.checkmate?(@current_player.color)
-      # notify_players
       @current_player.make_move(@board)
       swap_turn!
     end
@@ -66,11 +61,6 @@ class Game
   end
 
   private
-  def notify_players
-    puts "-- #{@current_player.color.capitalize}, it's your move! -- "
-    puts "Use the arrow keys to select a piece, and press enter to move."
-  end
-
   def swap_turn!
     if @current_player == @player_1
       @current_player = @player_2
