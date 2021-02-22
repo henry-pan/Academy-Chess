@@ -5,22 +5,11 @@ class Piece
 
   attr_reader :color, :board, :symbol
   attr_accessor :pos
-
-  CLASSIC_B = {rook:" ♜ ", knight:" ♞ ", bishop: " ♝ ", queen: " ♛ ", king: " ♚ ", pawn: " ♟ ", null: "   "}
-  CLASSIC_W = {rook:" ♖ ", knight:" ♘ ", bishop: " ♗ ", queen: " ♕ ", king: " ♔ ", pawn: " ♙ ", null: "   "}
-  ANIMAL_B =  {rook:"🦊", knight:"🐰", bishop: "🦝", queen: "🐿 ", king: "🦥", pawn: "🐭", null: "  "}
-  ANIMAL_W =  {rook:"🦏", knight:"🐴", bishop: "🐻", queen: "🐯", king: "🦁", pawn: "🐗", null: "  "}
-  FANTASY_B = {rook:"👹", knight:"👻", bishop: "🦹", queen: "🐉", king: "🧛", pawn: "🧟", null: "  "}
-  FANTASY_W = {rook:"🏰", knight:"🦄", bishop: "🧙", queen: "👸", king: "🤴", pawn: "🗡️ ", null: "  "}
   
   def initialize(color, board, pos)
     @color = color
     @board = board
     @pos = pos
-  end
-
-  def to_s
-    color == "white" ? CLASSIC_W[symbol] : CLASSIC_B[symbol]
   end
 
   def empty?
