@@ -47,5 +47,15 @@ class Display
     puts ""
     # puts code_notation ? "           #{("0".."7").to_a.join(" ")}  " : "  #{("a".."h").to_a.join(" ")}"
   end
+
+  def draw_piece(sym, skin)
+
+    CLASSIC_B = {rook:" ♜ ", knight:" ♞ ", bishop: " ♝ ", queen: " ♛ ", king: " ♚ ", pawn: " ♟ ", null: "   "}
+    CLASSIC_W = {rook:" ♖ ", knight:" ♘ ", bishop: " ♗ ", queen: " ♕ ", king: " ♔ ", pawn: " ♙ ", null: "   "}
+    ANIMAL_B =  {rook:"🦊", knight:"🐰", bishop: "🦝", queen: "🐿 ", king: "🦥", pawn: "🐭", null: "  "}
+    ANIMAL_W =  {rook:"🦏", knight:"🐴", bishop: "🐻", queen: "🐯", king: "🦁", pawn: "🐗", null: "  "}
+    FANTASY_B = {rook:"👹", knight:"👻", bishop: "🦹", queen: "🐉", king: "🧛", pawn: "🧟", null: "  "}
+    FANTASY_W = {rook:"🏰", knight:"🦄", bishop: "🧙", queen: "👸", king: "🤴", pawn: "🗡️ ", null: "  "}
   
+  end
 end
