@@ -18,12 +18,23 @@ class Display
     @cursor = Cursor.new([6,4], @board)
   end
 
-  def render(color)
+  def render(color, selected_piece = nil)
     skin = "animal"
     x, y = @cursor.cursor_pos
     message = "#{color.capitalize}'s Turn"
+    
+    valid_arr = selected_piece.nil? ? [] : selected_piece.valid_moves
+    
+    if valid_arr.empty?
+      coordinates = "[#{(("a".."h").to_a[y])}#{(8-x)}]"
+    else
+      sx, sy = selected_piece.pos[0], selected_piece.pos[1]
+      coordinates = "[#{(("a".."h").to_a[sy])}#{(8-sx)}] -> [#{(("a".."h").to_a[y])}#{(8-x)}]"
+    end
+
+
     puts "+===================++=================+"
-    puts "| Classic Mode      ||            [#{(("a".."h").to_a[y])}#{(8-x)}] |"
+    puts "| Classic Mode      ||            #{coordinates} |"
     puts "+======================================+"
     puts "| #{message}                         |"
     puts "+======================================+\n\n"
@@ -65,7 +76,9 @@ class Display
 
         # New print logic
         piece = draw_piece(col.symbol, col.color, skin)
-        if [x, y] == [i, j] # Cursor selected
+        if valid_arr.include?([i, j]) # Valid positions for piece
+          print [x, y] == [i, j] ? piece.on_yellow : piece.on_green
+        elsif [x, y] == [i, j] # Cursor selected
           print piece.on_red
         else
           bg = (i+j).odd? ? :light_blue : :blue
@@ -84,14 +97,11 @@ class Display
   def draw_piece(sym, color, skin)
     case skin
     when "classic"
-      skin_w = CLASSIC_W
-      skin_b = CLASSIC_B
+      skin_w, skin_b = CLASSIC_W, CLASSIC_B
     when "animal"
-      skin_w = ANIMAL_W
-      skin_b = ANIMAL_B
+      skin_w, skin_b = ANIMAL_W, ANIMAL_B
     when "fantasy"
-      skin_w = FANTASY_W
-      skin_b = FANTASY_B
+      skin_w, skin_b = FANTASY_W, FANTASY_B
     end
     color == "white" ? skin_w[sym] : skin_b[sym]
   end

@@ -53,9 +53,10 @@ class HumanPlayer < Player
       end_pos = nil
       while end_pos == nil
         system("clear")
-        @display.render(@color)
+        @display.render(@color, board[start_pos]) # Send selected piece to be rendered
         end_pos = @display.cursor.get_input.dup
       end
+      return end_pos if end_pos == start_pos
       end_valid = false if !board.valid_pos?(end_pos) # out-of-bounds
       end_valid = false if start_pos != end_pos && board[end_pos].color == color # can't capture own piece
       end_valid = false if !board[start_pos].valid_moves.include?(end_pos) # invalid move

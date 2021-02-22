@@ -14,8 +14,8 @@ This version only features basic rules and does not yet implement castling, en p
 ## Planned Features
 - Improved Selection - Allow for deselecting a piece, and also selecting a piece will display its valid moves.
 - Pawn Promotion - A pawn that reaches the end of the board is promoted to a Queen.
-- Horde Mode - One team will only have 4 rows of pawns.
 
 ## Stretch Goals
+- Horde Mode - One team will only have 4 rows of pawns.
 - Zombie Computer - A computer player that chooses moves randomly and captures pieces whenever possible.
 - Replay System - Rewatch a completed game, pieces will move on their own. After a game is completed, the log of all moves taken in the game are stored in a file.
