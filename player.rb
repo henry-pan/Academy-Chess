@@ -18,16 +18,24 @@ class HumanPlayer < Player
     while !valid_input
       valid_input = true
       start_pos = get_start(board)
-      end_pos = get_end(board, start_pos)
 
-      valid_input = false if start_pos == end_pos # cancel piece selection
+      # Ensure a valid end position is found
+      got_end = false
+      while !got_end
+        got_end = true
+        end_pos = get_end(board, start_pos)
+        # Cancel current piece move and switch to new piece
+        if board[end_pos].color == @color
+          start_pos = end_pos
+          got_end = false
+        end
+      end
+
+      # Cancel piece selection if re-selected
+      valid_input = false if start_pos == end_pos
     end
 
     board.move_piece(@color, start_pos, end_pos)
-
-
-    # raise "Cannot move into check" if in_check?(color) 
-
   end
 
   def get_start(board)
@@ -41,6 +49,7 @@ class HumanPlayer < Player
         start_pos = @display.cursor.get_input.dup
       end
       start_valid = false if !board.valid_pos?(start_pos) # out-of-bounds
+      start_valid = false if board[start_pos].valid_moves.empty? # piece cannot move
       start_valid = false if board[start_pos].color != color # not your piece
     end
     start_pos
@@ -53,12 +62,12 @@ class HumanPlayer < Player
       end_pos = nil
       while end_pos == nil
         system("clear")
-        @display.render(@color, board[start_pos]) # Send selected piece to be rendered
+        @display.render(@color, board[start_pos]) # Update board with selected piece
         end_pos = @display.cursor.get_input.dup
       end
-      return end_pos if end_pos == start_pos
+      return end_pos if end_pos == start_pos # Cancel piece selection
+      return end_pos if board[end_pos].color == color # Switch piece selection
       end_valid = false if !board.valid_pos?(end_pos) # out-of-bounds
-      end_valid = false if start_pos != end_pos && board[end_pos].color == color # can't capture own piece
       end_valid = false if !board[start_pos].valid_moves.include?(end_pos) # invalid move
     end
     end_pos

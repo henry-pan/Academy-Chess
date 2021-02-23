@@ -94,4 +94,8 @@ class Board
     in_check?(color)
   end
 
+  # TODO: Pawn Promotion
+  def promote()
+  end
+
 end

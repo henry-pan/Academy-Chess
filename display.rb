@@ -15,7 +15,7 @@ class Display
 
   def initialize(board)
     @board = board
-    @cursor = Cursor.new([6,4], @board)
+    @cursor = Cursor.new([6,4], @board) # Starts with a common opening
   end
 
   def render(color, selected_piece = nil)
@@ -26,63 +26,65 @@ class Display
     valid_arr = selected_piece.nil? ? [] : selected_piece.valid_moves
     
     if valid_arr.empty?
-      coordinates = "[#{(("a".."h").to_a[y])}#{(8-x)}]"
+      coordinates = "[#{(("a".."h").to_a[y])}#{(8-x)}]".rjust(15)
     else
       sx, sy = selected_piece.pos[0], selected_piece.pos[1]
-      coordinates = "[#{(("a".."h").to_a[sy])}#{(8-sx)}] -> [#{(("a".."h").to_a[y])}#{(8-x)}]"
+      coordinates = "[#{(("a".."h").to_a[sy])}#{(8-sx)}] -> [#{(("a".."h").to_a[y])}#{(8-x)}]".rjust(15)
     end
 
 
-    puts "+===================++=================+"
-    puts "| Classic Mode      ||            #{coordinates} |"
-    puts "+======================================+"
-    puts "| #{message}                         |"
-    puts "+======================================+\n\n"
+    # puts "+===================++=================+"
+    # puts "| Classic Mode      || #{coordinates} |"
+    # puts "+======================================+"
+    # puts "| #{message}                         |"
+    # puts "+======================================+\n\n"
     
-    if skin == "classic"
-      puts "              #{("a".."h").to_a.join("  ")}" # Classic Skin
-    else
-      puts "             #{("a".."h").to_a.join(" ")}" # Emoji Skin
-    end
-
-    # print "+===================+"
     # if skin == "classic"
-    #   print "    #{("a".."h").to_a.join("  ")}" # Classic Skin
+    #   puts "              #{("a".."h").to_a.join("  ")}" # Classic Skin
     # else
-    #   print "   #{("a".."h").to_a.join(" ")}" # Emoji Skin
+    #   puts "             #{("a".."h").to_a.join(" ")}" # Emoji Skin
     # end
-    # puts ""
+
+    print "+===================+"
+    if skin == "classic"
+      print "    #{("a".."h").to_a.join("  ")}" # Classic Skin
+    else
+      print "   #{("a".."h").to_a.join(" ")}" # Emoji Skin
+    end
+    puts ""
 
 
     # Print board
     @board.rows.each_with_index do |row, i|
 
-      # case i
-      # when 0 # Game Mode
-      #   print "| Classic Mode      |"
-      # when 1, 3, 5, 7 # Divider
-      #   print "+===================+"
-      # when 6 # Position
-      #   print "| [#{(("a".."h").to_a[y])}#{(8-x)}]              |"
-      # when 2 # Turn Indicator
-      #   print "| #{message}      |"
-      # else
-      #   print "                     "
-      # end
-      # print " #{(8-i)} "
+      case i
+      when 0 # Game Mode
+        print "| Classic Mode      |"
+      when 1, 3, 5, 7 # Divider
+        print "+===================+"
+      when 6 # Position
+        print "|   #{coordinates} |"
+      when 2 # Turn Indicator
+        print "| #{message}      |"
+      else
+        print "                     "
+      end
+      print " #{(8-i)} "
 
-      print "           #{(8-i)} "
+      # print "           #{(8-i)} "
       row.each_with_index do |col, j|
 
         # New print logic
         piece = draw_piece(col.symbol, col.color, skin)
         if valid_arr.include?([i, j]) # Valid positions for piece
-          print [x, y] == [i, j] ? piece.on_yellow : piece.on_green
+          bg = (i+j).odd? ? :green : :light_green
+          bg = :yellow if [x, y] == [i, j]
+          print piece.colorize({background: bg, color: :black})
         elsif [x, y] == [i, j] # Cursor selected
-          print piece.on_red
+          print piece.black.on_red
         else
-          bg = (i+j).odd? ? :light_blue : :blue
-          print piece.colorize({background: bg})
+          bg = (i+j).odd? ? :light_black : :light_white
+          print piece.colorize({background: bg, color: :black})
         end
 
       end

@@ -12,7 +12,6 @@ Use the arrow keys to move the cursor, and press `enter` or `spacebar` to select
 This version only features basic rules and does not yet implement castling, en passant, or pawn promotion.
 
 ## Planned Features
-- Improved Selection - Allow for deselecting a piece, and also selecting a piece will display its valid moves.
 - Pawn Promotion - A pawn that reaches the end of the board is promoted to a Queen.
 
 ## Stretch Goals
