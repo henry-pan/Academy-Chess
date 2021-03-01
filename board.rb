@@ -54,6 +54,9 @@ class Board
     self[end_pos], self[start_pos] = self[start_pos], @null_piece
 
     self[end_pos].pos = end_pos
+
+    
+    promote(color, end_pos) if self[end_pos].is_a?(Pawn)
     raise "Cannot move into check" if in_check?(color) 
   end
 
@@ -95,7 +98,17 @@ class Board
   end
 
   # TODO: Pawn Promotion
-  def promote()
+  def promote(color, end_pos)
+    end_row = end_pos[0]
+    if color == "white"
+      if end_row == 0
+        self[end_pos] = Queen.new("white", self, end_pos)
+      end
+    else
+      if end_row == 7
+        self[end_pos] = Queen.new("black", self, end_pos)
+      end
+    end
   end
 
 end
