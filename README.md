@@ -18,4 +18,3 @@ This version only features basic rules and does not yet implement castling, en p
 ## Stretch Goals
 - Horde Mode - One team will only have 4 rows of pawns.
 - Zombie Computer - A computer player that chooses moves randomly and captures pieces whenever possible.
-- Castling - 
