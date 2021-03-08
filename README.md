@@ -9,7 +9,7 @@ In the terminal, run `ruby game.rb`.
 Use the arrow keys to move the cursor, and press `enter` or `spacebar` to select a piece. After selecting a piece, use `enter` or `spacebar` to choose where to move the piece.
 
 ## Rules
-This version only features basic rules and does not yet implement castling, en passant, or pawn promotion. Stalemates are not detected.
+This version only features basic rules and does not yet implement castling or en passant. Stalemates are also not detected.
 
 ## Planned Features
 - Pawn Promotion - A pawn that reaches the end of the board is promoted to a Queen.
